@@ -2,3 +2,4 @@ node_modules
 vite.config.ts
 vitest.config.ts
 .prettierrc.cjs
+tailwind.config.cjs
