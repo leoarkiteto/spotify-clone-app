@@ -1,15 +1,35 @@
-/* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
-
 module.exports = {
-  root: true,
-  extends: [
-    'plugin:vue/vue3-essential',
-    '@vue/eslint-config-airbnb-with-typescript',
-    'plugin:prettier/recommended'
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    project: './tsconfig.json'
-  },
-}
+	'env': {
+		'browser': true,
+		'es2021': true
+	},
+	'extends': [
+		'plugin:vue/vue3-essential',
+		'@vue/eslint-config-airbnb-with-typescript',
+		'plugin:prettier/recommended'
+	],
+	'overrides': [
+		{
+			'env': {
+				'node': true
+			},
+			'files': [
+				'.eslintrc.{js,cjs}'
+			],
+			'parserOptions': {
+				'sourceType': 'script',
+				project: './tsconfig.json'
+			}
+		}
+	],
+	'parserOptions': {
+		'ecmaVersion': 'latest',
+		'parser': '@typescript-eslint/parser',
+		'sourceType': 'module'
+	},
+	'plugins': [
+		'@typescript-eslint',
+		'vue'
+	],
+	'rules': {}
+};
