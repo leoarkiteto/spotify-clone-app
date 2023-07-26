@@ -1,8 +1,12 @@
-{
-  "$schema": "https://json.schemastore.org/prettierrc",
-  "semi": false,
-  "tabWidth": 2,
-  "singleQuote": true,
-  "printWidth": 100,
-  "trailingComma": "none"
+module.exports = {
+  semi: true,
+  singleQuote: false,
+  arrowParens: "avoid",
+  trailingComma: "es5",
+  quoteProps: "as-needed",
+  bracketSpacing: true,
+  bracketSameLine: false,
+  proseWrap: "always",
+  htmlWhitespaceSensitivity: "strict",
+  vueIdentScriptAndStyle: true
 }
