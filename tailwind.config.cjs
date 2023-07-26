@@ -2,10 +2,14 @@
 module.exports = {
   content: [
 	  "./index.html",
-	  "./src/**/*.{js,ts,jsx,tsx}",
+	  "./src/**/*.{js,ts,jsx,tsx,vue}",
   ],
   theme: {
     extend: {},
   },
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [
+		require("prettier-plugin-tailwindcss"),
+	  require("@tailwindcss/forms"),
+	  require("@tailwindcss/typography"),
+  ],
 }
