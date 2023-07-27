@@ -85,7 +85,7 @@ const openMenu = ref(false);
       <div class="my-8"></div>
 
       <ul>
-        <RouterLink to="/">
+        <RouterLink :to="{ name: 'home' }">
           <MenuItem
             :icon-size="23"
             class="ml-[1px]"
@@ -93,6 +93,9 @@ const openMenu = ref(false);
             name="Home"
             page-url="/"
           />
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'search' }">
           <MenuItem
             :icon-size="24"
             class="ml-[1px]"
@@ -100,6 +103,9 @@ const openMenu = ref(false);
             name="Search"
             page-url="/search"
           />
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'library' }">
           <MenuItem
             :icon-size="23"
             class="ml-[2px]"
@@ -107,7 +113,11 @@ const openMenu = ref(false);
             name="Library"
             page-url="/library"
           />
-          <div class="py-3.5"></div>
+        </RouterLink>
+
+        <div class="py-3.5"></div>
+
+        <RouterLink :to="{ name: 'playlist' }">
           <MenuItem
             :icon-size="24"
             class="ml-[1px]"
@@ -115,6 +125,9 @@ const openMenu = ref(false);
             name="Create Playlist"
             page-url="/playlist"
           />
+        </RouterLink>
+
+        <RouterLink :to="{ name: 'liked' }">
           <MenuItem
             :icon-size="27"
             class="ml-[1px]"
