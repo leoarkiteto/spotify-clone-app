@@ -41,7 +41,7 @@ function isHover() {
 
 <template>
   <li
-    class="flex items-center pb-4 cursor-pointer"
+    class="flex cursor-pointer items-center pb-4"
     @focusin="isHover"
     @focusout="isHover"
     @mouseenter="isHover"
@@ -50,7 +50,7 @@ function isHover() {
     <img :src="`/images/icons/${icon}.png`" :width="iconSize" alt="" />
     <div
       :class="textIsHover ? 'text-white' : 'text-gray-400'"
-      class="font-semibold text-[14px] ml-4 mt-0.5"
+      class="ml-4 mt-0.5 text-[14px] font-semibold"
     >
       <span :class="route.path === pageUrl ? 'text-white' : ''">{{
         props.name
@@ -58,5 +58,3 @@ function isHover() {
     </div>
   </li>
 </template>
-
-<style scoped></style>
