@@ -1,85 +1,75 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import { ref } from "vue";
+import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
+import ChevronRight from "vue-material-design-icons/ChevronRight.vue";
+import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
+import ChevronUp from "vue-material-design-icons/ChevronUp.vue";
+
+const openMenu = ref(false);
 </script>
 
 <template>
-  <header class='bg-amber-600'>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div>
+    <div
+      class="w-[calc(100%-240px)] h-[60px] fixed right-0 z-20 bg-[#101010] bg-opacity-80 flex items-center justify-between"
+    >
+      <div class="flex items-center ml-6">
+        <button
+          class="rounded-full bg-black p-[1px] cursor-pointer"
+          type="button"
+        >
+          <ChevronLeft :size="30" fill-color="#fff" />
+        </button>
+        <button
+          class="rounded-full bg-black p-[1px] ml-4 cursor-pointer"
+          type="button"
+        >
+          <ChevronRight :size="30" fill-color="#fff" />
+        </button>
+      </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <button
+        :class="openMenu ? 'bg-[#282828]' : 'bg-black'"
+        class="bg-black hover:bg-[#282828] rounded-full p-0.5 mr-8 mt-0.5 cursor-pointer"
+        type="button"
+        @click="openMenu = !openMenu"
+      >
+        <span class="flex items-center">
+          <img
+            alt=""
+            class="rounded-full"
+            src="https://lh3.googleusercontent.com/a/AAcHTtdkGlqtHkdfvvuXXw8rw6Kaxw-nGZhYPcOAAVPGLnj_UcDu=s288-c-no"
+            width="27"
+          />
+          <span class="text-white text-[14px] ml-1.5 font-semibold"
+            >Leo Franca</span
+          >
+          <ChevronDown
+            v-if="!openMenu"
+            :size="25"
+            fill-color="#fff"
+            @click="openMenu = true"
+          />
+          <ChevronUp
+            v-else
+            :size="25"
+            fill-color="#fff"
+            @click="openMenu = false"
+          />
+        </span>
+      </button>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <span
+        v-if="openMenu"
+        class="cursor-pointer p-1 right-[35px] top-[52px] rounded-sm fixed w-[190px] bg-[#282828] shadow-2xl z-50"
+      >
+        <ul class="text-gray-200 font-semibold text-[14px]">
+          <li class="px-3 py-2.5 hover:bg-[#3e3d3d] border-b border-b-gray-600"
+            >Profile</li
+          >
+          <li class="px-3 py-2.5 hover:bg-[#3e3d3d]">Profile</li>
+        </ul>
+      </span>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
