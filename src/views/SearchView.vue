@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import CategorySelect from "@/components/CategorySelect.vue";
-import categoryLIst from "@/db/categoryLIst";
+import categoryLIst from "@/db/categoryLIst.json";
 </script>
 
 <template>
