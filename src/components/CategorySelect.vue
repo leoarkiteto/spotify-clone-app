@@ -9,14 +9,14 @@ interface Props {
 
 const props = defineProps<Props>();
 const randColor = ref("");
-randColor.value = uniqolor.random();
+randColor.value = uniqolor.random().color;
 </script>
 
 <template>
   <RouterLink to="library">
     <div
-      v-if="randColor.color"
-      :style="`background-color: ${randColor.color}`"
+      v-if="randColor"
+      :style="`background-color: ${randColor}`"
       class="relative aspect-square overflow-hidden rounded-xl brightness-[0.87] contrast-[2]"
     >
       <div class="pl-4 pt-4 text-[23px] font-semibold text-white">{{
