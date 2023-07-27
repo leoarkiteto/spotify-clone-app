@@ -4,6 +4,7 @@ import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 import ChevronRight from "vue-material-design-icons/ChevronRight.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 import ChevronUp from "vue-material-design-icons/ChevronUp.vue";
+
 import MenuItem from "@/components/MenuItem.vue";
 
 const openMenu = ref(false);
@@ -12,17 +13,17 @@ const openMenu = ref(false);
 <template>
   <div>
     <div
-      class="w-[calc(100%-240px)] h-[60px] fixed right-0 z-20 bg-[#101010] bg-opacity-80 flex items-center justify-between"
+      class="fixed right-0 z-20 flex h-[60px] w-[calc(100%-240px)] items-center justify-between bg-[#101010] bg-opacity-80"
     >
-      <div class="flex items-center ml-6">
+      <div class="ml-6 flex items-center">
         <button
-          class="rounded-full bg-black p-[1px] cursor-pointer"
+          class="cursor-pointer rounded-full bg-black p-[1px]"
           type="button"
         >
           <ChevronLeft :size="30" fill-color="#fff" />
         </button>
         <button
-          class="rounded-full bg-black p-[1px] ml-4 cursor-pointer"
+          class="ml-4 cursor-pointer rounded-full bg-black p-[1px]"
           type="button"
         >
           <ChevronRight :size="30" fill-color="#fff" />
@@ -31,7 +32,7 @@ const openMenu = ref(false);
 
       <button
         :class="openMenu ? 'bg-[#282828]' : 'bg-black'"
-        class="bg-black hover:bg-[#282828] rounded-full p-0.5 mr-8 mt-0.5 cursor-pointer"
+        class="mr-8 mt-0.5 cursor-pointer rounded-full bg-black p-0.5 hover:bg-[#282828]"
         type="button"
         @click="openMenu = !openMenu"
       >
@@ -42,7 +43,7 @@ const openMenu = ref(false);
             src="https://lh3.googleusercontent.com/a/AAcHTtdkGlqtHkdfvvuXXw8rw6Kaxw-nGZhYPcOAAVPGLnj_UcDu=s288-c-no"
             width="27"
           />
-          <span class="text-white text-[14px] ml-1.5 font-semibold"
+          <span class="ml-1.5 text-[14px] font-semibold text-white"
             >Leo Franca</span
           >
           <ChevronDown
@@ -62,10 +63,10 @@ const openMenu = ref(false);
 
       <span
         v-if="openMenu"
-        class="cursor-pointer p-1 right-[35px] top-[52px] rounded-sm fixed w-[190px] bg-[#282828] shadow-2xl z-50"
+        class="fixed right-[35px] top-[52px] z-50 w-[190px] cursor-pointer rounded-sm bg-[#282828] p-1 shadow-2xl"
       >
-        <ul class="text-gray-200 font-semibold text-[14px]">
-          <li class="px-3 py-2.5 hover:bg-[#3e3d3d] border-b border-b-gray-600"
+        <ul class="text-[14px] font-semibold text-gray-200">
+          <li class="border-b border-b-gray-600 px-3 py-2.5 hover:bg-[#3e3d3d]"
             >Profile</li
           >
           <li class="px-3 py-2.5 hover:bg-[#3e3d3d]">Profile</li>
@@ -73,7 +74,7 @@ const openMenu = ref(false);
       </span>
     </div>
 
-    <div id="sideNav" class="h-full p-6 w-[240px] fixed z-50 bg-black">
+    <div id="sideNav" class="fixed z-50 h-full w-[240px] bg-black p-6">
       <RouterLink to="/">
         <img
           alt="spotify logotype"
@@ -92,7 +93,6 @@ const openMenu = ref(false);
             name="Home"
             page-url="/"
           />
-
           <MenuItem
             :icon-size="24"
             class="ml-[1px]"
@@ -100,7 +100,6 @@ const openMenu = ref(false);
             name="Search"
             page-url="/search"
           />
-
           <MenuItem
             :icon-size="23"
             class="ml-[2px]"
@@ -108,9 +107,7 @@ const openMenu = ref(false);
             name="Library"
             page-url="/library"
           />
-
           <div class="py-3.5"></div>
-
           <MenuItem
             :icon-size="24"
             class="ml-[1px]"
@@ -118,7 +115,6 @@ const openMenu = ref(false);
             name="Create Playlist"
             page-url="/playlist"
           />
-
           <MenuItem
             :icon-size="27"
             class="ml-[1px]"
@@ -133,19 +129,19 @@ const openMenu = ref(false);
 
       <ul>
         <li
-          class="font-semibold text-[13px] mt-3 text-gray-300 hover:text-white"
+          class="mt-3 text-[13px] font-semibold text-gray-300 hover:text-white"
           >My Playlist #1</li
         >
         <li
-          class="font-semibold text-[13px] mt-3 text-gray-300 hover:text-white"
+          class="mt-3 text-[13px] font-semibold text-gray-300 hover:text-white"
           >My Playlist #2</li
         >
         <li
-          class="font-semibold text-[13px] mt-3 text-gray-300 hover:text-white"
+          class="mt-3 text-[13px] font-semibold text-gray-300 hover:text-white"
           >My Playlist #3</li
         >
         <li
-          class="font-semibold text-[13px] mt-3 text-gray-300 hover:text-white"
+          class="mt-3 text-[13px] font-semibold text-gray-300 hover:text-white"
           >My Playlist #4</li
         >
       </ul>
@@ -153,7 +149,7 @@ const openMenu = ref(false);
   </div>
 
   <div
-    class="fixed right-0 top-0 w-[calc(100%-240px)] overflow-auto h-full bg-gradient-to-b from-[#1c1c1c] to-black"
+    class="fixed right-0 top-0 h-full w-[calc(100%-240px)] overflow-auto bg-gradient-to-b from-[#1c1c1c] to-black"
   >
     <div class="mt-[70px]"></div>
     <RouterView />
