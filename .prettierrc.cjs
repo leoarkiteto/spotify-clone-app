@@ -8,5 +8,6 @@ module.exports = {
   bracketSameLine: false,
   proseWrap: "always",
   htmlWhitespaceSensitivity: "strict",
-  vueIdentScriptAndStyle: true
+  vueIdentScriptAndStyle: true,
+	plugins: ['prettier-plugin-tailwindcss']
 }
