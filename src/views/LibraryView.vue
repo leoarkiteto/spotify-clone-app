@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import Play from "vue-material-design-icons/Play.vue";
+import Pause from "vue-material-design-icons/Pause.vue";
 import Heart from "vue-material-design-icons/Heart.vue";
 import DotsHorizontal from "vue-material-design-icons/DotsHorizontal.vue";
 import ClockTimeThreeOutline from "vue-material-design-icons/ClockTimeThreeOutline.vue";
@@ -62,7 +63,7 @@ function playFunc() {
             @click="playFunc"
           >
             <Play v-if="!isPlaying" :size="25" fill-color="#181818" />
-            <Play v-else :size="25" fill-color="#181818" />
+            <Pause v-else :size="25" fill-color="#181818" />
           </button>
 
           <button type="button">
