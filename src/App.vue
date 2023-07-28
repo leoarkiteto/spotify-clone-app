@@ -1,13 +1,22 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
 import ChevronLeft from "vue-material-design-icons/ChevronLeft.vue";
 import ChevronRight from "vue-material-design-icons/ChevronRight.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 import ChevronUp from "vue-material-design-icons/ChevronUp.vue";
 
 import MenuItem from "@/components/MenuItem.vue";
+import MusicPlayer from "@/components/MusicPlayer.vue";
+import { useSongStore } from "@/stores/song";
 
+const useSong = useSongStore();
+const { isPlaying, currentTrack } = storeToRefs(useSong);
 const openMenu = ref(false);
+
+onMounted(() => {
+  isPlaying.value = false;
+});
 </script>
 
 <template>
@@ -75,7 +84,7 @@ const openMenu = ref(false);
     </div>
 
     <div id="sideNav" class="fixed z-50 h-full w-[240px] bg-black p-6">
-      <RouterLink to="/">
+      <RouterLink :to="{ name: 'home' }">
         <img
           alt="spotify logotype"
           src="/images/icons/spotify-logo.png"
@@ -117,7 +126,7 @@ const openMenu = ref(false);
 
         <div class="py-3.5"></div>
 
-        <RouterLink :to="{ name: 'playlist' }">
+        <RouterLink :to="{ name: 'home' }">
           <MenuItem
             :icon-size="24"
             class="ml-[1px]"
@@ -127,7 +136,7 @@ const openMenu = ref(false);
           />
         </RouterLink>
 
-        <RouterLink :to="{ name: 'liked' }">
+        <RouterLink :to="{ name: 'home' }">
           <MenuItem
             :icon-size="27"
             class="ml-[1px]"
@@ -168,4 +177,6 @@ const openMenu = ref(false);
     <RouterView />
     <div class="mb-[100px]"></div>
   </div>
+
+  <MusicPlayer v-if="currentTrack" />
 </template>
