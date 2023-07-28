@@ -5,7 +5,7 @@ module.exports = {
   trailingComma: "es5",
   quoteProps: "as-needed",
   bracketSpacing: true,
-  bracketSameLine: false,
+  bracketSameLine: true,
   proseWrap: "always",
   htmlWhitespaceSensitivity: "strict",
   vueIdentScriptAndStyle: true,
