@@ -1,18 +1,12 @@
 <script lang="ts" setup>
 import CategorySelect from "@/components/CategorySelect.vue";
 import categoryLIst from "@/db/categoryLIst.json";
+import TitleButton from "@/components/TitleButton.vue";
 </script>
 
 <template>
   <div class="p-8">
-    <button
-      class="cursor-pointer text-2xl font-semibold text-white hover:underline"
-      type="button"
-    >
-      Podcast
-    </button>
-
-    <div class="py-1.5"></div>
+    <TitleButton>Podcast</TitleButton>
 
     <div
       class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"

@@ -13,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const icon = ref<string | null>(null);
+const icon = ref("");
 const textIsHover = ref(false);
 
 watchEffect(() => {
@@ -41,7 +41,7 @@ function isHover() {
 
 <template>
   <li
-    class="flex cursor-pointer items-center pb-4"
+    class="flex cursor-pointer items-center space-x-4 pb-4"
     @focusin="isHover"
     @focusout="isHover"
     @mouseenter="isHover"
@@ -50,7 +50,7 @@ function isHover() {
     <img :src="`/images/icons/${icon}.png`" :width="iconSize" alt="" />
     <div
       :class="textIsHover ? 'text-white' : 'text-gray-400'"
-      class="ml-4 mt-0.5 text-[14px] font-semibold"
+      class="mt-0.5 text-[14px] font-semibold"
     >
       <span :class="route.path === pageUrl ? 'text-white' : ''">{{
         props.name

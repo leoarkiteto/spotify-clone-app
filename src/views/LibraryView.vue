@@ -1,17 +1,22 @@
 <script lang="ts" setup>
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
 import Heart from "vue-material-design-icons/Heart.vue";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 import DotsHorizontal from "vue-material-design-icons/DotsHorizontal.vue";
 import ClockTimeThreeOutline from "vue-material-design-icons/ClockTimeThreeOutline.vue";
 
-import artist from "@/db/artist.json";
 import SongRow from "@/components/SongRow.vue";
 import { useSongStore } from "@/stores/song";
 
+import artist from "@/db/artist.json";
+import TitleButton from "@/components/TitleButton.vue";
+
 const useSong = useSongStore();
 const { isPlaying, currentTrack, currentArtist } = storeToRefs(useSong);
+const liked = ref(false);
 
 function playFunc() {
   if (currentTrack.value) {
@@ -24,16 +29,10 @@ function playFunc() {
 
 <template>
   <div class="p-8">
-    <button
-      class="cursor-pointer text-2xl font-semibold text-white hover:underline"
-      type="button"
-    >
-      {{ artist.name }}
-    </button>
+    <TitleButton>{{ artist.name }}</TitleButton>
 
-    <div class="py-1.5"></div>
-
-    <div class="relative flex h-full w-full items-center">
+    <!-- Header of Album -->
+    <div class="relative mt-3 flex h-full w-full items-center">
       <img :alt="artist.name" :src="artist.albumCover" width="140" />
 
       <div class="ml-5 w-full">
@@ -43,6 +42,7 @@ function playFunc() {
           >{{ artist.name }}</p
         >
 
+        <!-- Album Info -->
         <div class="flex text-[13px] text-gray-300">
           <p class="flex">Album</p>
           <div class="ml-2 flex">
@@ -56,6 +56,7 @@ function playFunc() {
           </div>
         </div>
 
+        <!-- Main Player and Album Like -->
         <div class="absolute bottom-0 mb-1.5 flex items-center gap-4">
           <button
             class="rounded-full bg-white p-1"
@@ -66,8 +67,9 @@ function playFunc() {
             <Pause v-else :size="25" fill-color="#181818" />
           </button>
 
-          <button type="button">
-            <Heart :size="30" fill-color="#1bd760" />
+          <button type="button" @click="liked = !liked">
+            <HeartOutline v-if="liked" :size="30" fill-color="#1bd760" />
+            <Heart v-else :size="30" fill-color="#1bd760" />
           </button>
           <button type="button">
             <DotsHorizontal :size="25" fill-color="#fff" />
@@ -76,8 +78,8 @@ function playFunc() {
       </div>
     </div>
 
-    <div class="mt-6"></div>
-    <div class="flex items-center justify-between px-5 pt-2">
+    <!-- Titles and Timelapse -->
+    <div class="mt-6 flex items-center justify-between px-5 pt-2">
       <div class="flex items-center justify-between text-gray-400">
         <p class="mr-7">#</p>
         <p class="text-sm">Title</p>
@@ -90,6 +92,7 @@ function playFunc() {
 
     <div class="mb-4 mt-2 border-b border-b-[#2a2a2a]"></div>
 
+    <!-- List of Musics -->
     <ul v-for="(track, index) in artist.tracks" :key="track" class="w-full">
       <SongRow :artist="artist" :index="++index" :track="track" />
     </ul>

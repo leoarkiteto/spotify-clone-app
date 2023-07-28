@@ -5,17 +5,15 @@ interface Props {
   subtitle: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
-  <RouterLink to="library">
+  <RouterLink :to="{ name: 'library' }">
     <div class="cursor-pointer rounded-md bg-[#111] p-4 hover:bg-[#252525]">
-      <img :alt="props.title" :src="props.image" class="rounded-md" />
-      <p class="pt-4 text-[17px] font-semibold text-white">{{ props.title }}</p>
-      <p class="pb-3 pt-1 text-[14px] text-gray-400">{{ props.subtitle }}</p>
+      <img :alt="title" :src="image" class="rounded-md" />
+      <p class="pb-1 pt-4 text-[17px] font-semibold text-white">{{ title }}</p>
+      <p class="pb-3 text-[14px] text-gray-400">{{ subtitle }}</p>
     </div>
   </RouterLink>
 </template>
-
-<style scoped></style>

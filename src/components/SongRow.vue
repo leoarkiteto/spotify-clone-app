@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
 import Heart from "vue-material-design-icons/Heart.vue";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 
 import { useSongStore } from "@/stores/song";
 
@@ -25,6 +26,7 @@ const useSong = useSongStore();
 const { isPlaying, currentTrack } = storeToRefs(useSong);
 const isHover = ref(false);
 const isTrackTime = ref<string | null>(null);
+const liked = ref(false);
 
 onMounted(() => {
   const audio = new Audio(props.track.path);
@@ -78,10 +80,10 @@ onMounted(() => {
 
       <div>
         <div
-          :class="{
-            'text-green-500': currentTrack?.name === track.name,
-          }"
-          class="font-semibold text-white"
+          :class="
+            currentTrack?.name === track.name ? 'text-green-500' : 'text-white'
+          "
+          class="font-semibold"
         >
           {{ track.name }}
         </div>
@@ -92,8 +94,9 @@ onMounted(() => {
     </div>
 
     <div class="flex items-center">
-      <button v-if="isHover" type="button">
-        <Heart />
+      <button v-if="isHover" type="button" @click="liked = !liked">
+        <Heart v-if="liked" fill-color="#1bd760" />
+        <HeartOutline v-else fill-color="#c2c2c2" />
       </button>
       <div v-if="isTrackTime" class="mx-5 text-xs text-gray-400"
         >{{ isTrackTime }}
