@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 
-import artistDB from "../db/artist.json";
+import artistDB from "@/db/artist.json";
 
-type Track = (typeof artistDB.tracks)[0];
+type Track = (typeof artistDB.tracks)[number];
 type Artist = typeof artistDB;
+
 export const useSongStore = defineStore("song", {
   state: () => ({
     isPlaying: false,
