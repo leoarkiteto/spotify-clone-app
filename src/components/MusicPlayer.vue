@@ -8,6 +8,8 @@ import SkipBackward from "vue-material-design-icons/SkipBackward.vue";
 import SkipForward from "vue-material-design-icons/SkipForward.vue";
 import PictureInPictureBottomRight from "vue-material-design-icons/PictureInPictureBottomRight.vue";
 
+import MusicPlayerVolume from "@/components/MusicPlayerVolume.vue";
+
 import { useSongStore } from "@/stores/song";
 
 const useSong = useSongStore();
@@ -201,10 +203,14 @@ watch(
 
         <div
           v-if="isTrackTimeTotal"
-          class="pr-2 pt-[11px] text-[12px] text-white"
+          class="pl-2 pt-[11px] text-[12px] text-white"
           >{{ isTrackTimeTotal }}
         </div>
       </div>
+    </div>
+
+    <div class="flex w-1/4 items-center justify-end pr-10">
+      <MusicPlayerVolume />
     </div>
   </div>
 </template>
