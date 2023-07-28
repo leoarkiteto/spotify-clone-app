@@ -2,8 +2,17 @@ import { defineStore } from "pinia";
 
 import artistDB from "@/db/artist.json";
 
-type Track = (typeof artistDB.tracks)[number];
-type Artist = typeof artistDB;
+type Track = {
+  id: number;
+  name: string;
+  path: string;
+};
+type Artist = {
+  name: string;
+  albumCover: string;
+  releaseYear: string;
+  tracks: Track[];
+};
 
 export const useSongStore = defineStore("song", {
   state: () => ({
@@ -84,4 +93,5 @@ export const useSongStore = defineStore("song", {
       this.currentTrack = null;
     },
   },
+  persist: true,
 });

@@ -93,7 +93,7 @@ watch(
   () => isTrackTimeCurrent.value,
   time => {
     if (time && time === isTrackTimeTotal.value) {
-      useSong.nextSong(currentTrack.value);
+      useSong.nextSong(currentTrack.value!);
     }
   }
 );
@@ -108,19 +108,19 @@ watch(
     <div class="flex w-1/4 items-center">
       <div class="ml-4 flex items-center">
         <img
-          :src="currentArtist.albumCover"
+          :src="currentArtist?.albumCover"
           alt="album"
           class="rounded-sm shadow-2xl"
           width="55"
         />
         <div class="ml-4">
           <p class="cursor-pointer text-[14px] text-white hover:underline">
-            {{ currentTrack.name }}
+            {{ currentTrack?.name }}
           </p>
           <p
             class="cursor-pointer text-[11px] text-gray-400 hover:text-white hover:underline"
           >
-            {{ currentTrack.name }}
+            {{ currentTrack?.name }}
           </p>
         </div>
       </div>
@@ -142,13 +142,13 @@ watch(
             <SkipBackward
               :size="25"
               fill-color="#fff"
-              @click="useSong.prevSong(currentTrack)"
+              @click="useSong.prevSong(currentTrack!)"
             />
           </button>
           <button
             class="mx-3 rounded-full bg-white p-1"
             type="button"
-            @click="useSong.playOrPauseThisSong(currentArtist, currentTrack)"
+            @click="useSong.playOrPauseThisSong(currentArtist!, currentTrack!)"
           >
             <Play v-if="!isPlaying" :size="25" fill-color="#181818" />
             <Pause v-else :size="25" fill-color="#181818" />
@@ -157,11 +157,63 @@ watch(
             <SkipForward
               :size="25"
               fill-color="#fff"
-              @click="useSong.nextSong(currentTrack)"
+              @click="useSong.nextSong(currentTrack!)"
             />
           </button>
+        </div>
+      </div>
+
+      <div class="flex h-[25px] items-center">
+        <div
+          v-if="isTrackTimeCurrent"
+          class="pr-2 pt-[11px] text-[12px] text-white"
+          >{{ isTrackTimeCurrent }}</div
+        >
+        <div
+          ref="seekerContainer"
+          class="relative mb-3 mt-2 w-full"
+          @focusin="isHover = true"
+          @focusout="isHover = false"
+          @mouseenter="isHover = true"
+          @mouseleave="isHover = false"
+        >
+          <label for="seeker">
+            <input
+              id="seeker"
+              ref="seeker"
+              v-model="range"
+              :class="{ rangeDotHidden: !isHover }"
+              class="absolute z-40 my-2 h-0 w-full appearance-none rounded-full bg-opacity-100 accent-white focus:outline-none"
+              type="range"
+            />
+          </label>
+
+          <div
+            :class="isHover ? 'bg-green-500' : 'bg-white'"
+            :style="`width: ${range}%;`"
+            class="pointer-events-none absolute inset-y-0 left-0 z-10 mt-[6px] h-[4px] w-0"
+          ></div>
+
+          <div
+            class="absolute inset-y-0 left-0 z-[0] mt-[6px] h-[4px] w-full rounded-full bg-gray-500"
+          ></div>
+        </div>
+
+        <div
+          v-if="isTrackTimeTotal"
+          class="pr-2 pt-[11px] text-[12px] text-white"
+          >{{ isTrackTimeTotal }}
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.rangeDotHidden[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+</style>

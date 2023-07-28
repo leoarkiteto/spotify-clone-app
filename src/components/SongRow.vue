@@ -7,20 +7,19 @@ import Heart from "vue-material-design-icons/Heart.vue";
 
 import { useSongStore } from "@/stores/song";
 
-interface Props {
-  track: {
-    name: string;
-    value: {
-      path: string;
-    };
-  };
-  artist: {
-    name: string;
-  };
-  index: number;
-}
+type Track = {
+  id: number;
+  name: string;
+  path: string;
+};
+type Artist = {
+  name: string;
+  albumCover: string;
+  releaseYear: string;
+  tracks: Track[];
+};
 
-const props = defineProps<Props>();
+const props = defineProps<{ index: number; track: Track; artist: Artist }>();
 
 const useSong = useSongStore();
 const { isPlaying, currentTrack } = storeToRefs(useSong);
@@ -28,7 +27,7 @@ const isHover = ref(false);
 const isTrackTime = ref<string | null>(null);
 
 onMounted(() => {
-  const audio = new Audio(props.track.value.path);
+  const audio = new Audio(props.track.path);
   audio.addEventListener("loadedmetadata", () => {
     const { duration } = audio;
     const minutes = Math.floor(duration / 60);
