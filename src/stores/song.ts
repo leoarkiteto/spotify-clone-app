@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-import artistDB from "@/db/artist.json";
+import artistDB from "@/db/artist";
 
 type Track = {
   id: number;
@@ -14,12 +14,13 @@ type Artist = {
   tracks: Track[];
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const useSongStore = defineStore("song", {
   state: () => ({
     isPlaying: false,
     audio: null as HTMLAudioElement | null,
-    currentArtist: null as Artist | null,
-    currentTrack: null as Track | null,
+    currentArtist: {} as Artist,
+    currentTrack: {} as Track,
     likedAll: false,
   }),
 
@@ -90,8 +91,8 @@ export const useSongStore = defineStore("song", {
     resetState() {
       this.isPlaying = false;
       this.audio = null;
-      this.currentArtist = null;
-      this.currentTrack = null;
+      this.currentArtist = {} as Artist;
+      this.currentTrack = {} as Track;
     },
 
     like() {
