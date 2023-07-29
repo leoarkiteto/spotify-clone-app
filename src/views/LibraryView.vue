@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
@@ -15,8 +14,8 @@ import artist from "@/db/artist.json";
 import TitleButton from "@/components/TitleButton.vue";
 
 const useSong = useSongStore();
-const { isPlaying, currentTrack, currentArtist } = storeToRefs(useSong);
-const liked = ref(false);
+const { isPlaying, currentTrack, currentArtist, likedAll } =
+  storeToRefs(useSong);
 
 function playFunc() {
   if (currentTrack.value) {
@@ -24,6 +23,10 @@ function playFunc() {
     return;
   }
   useSong.playFromFirst();
+}
+
+function likeAlbum() {
+  useSong.like();
 }
 </script>
 
@@ -67,8 +70,8 @@ function playFunc() {
             <Pause v-else :size="25" fill-color="#181818" />
           </button>
 
-          <button type="button" @click="liked = !liked">
-            <HeartOutline v-if="liked" :size="30" fill-color="#1bd760" />
+          <button type="button" @click="likeAlbum">
+            <HeartOutline v-if="likedAll" :size="30" fill-color="#1bd760" />
             <Heart v-else :size="30" fill-color="#1bd760" />
           </button>
           <button type="button">

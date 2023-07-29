@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
+import { useSongStore } from "@/stores/song";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import NavBar from "@/components/layout/NavBar.vue";
-import { useSongStore } from "@/stores/song";
 import SidebarNav from "@/components/layout/SidebarNav.vue";
 
 const useSong = useSongStore();

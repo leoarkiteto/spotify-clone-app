@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import Heart from "vue-material-design-icons/Heart.vue";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
 import SkipBackward from "vue-material-design-icons/SkipBackward.vue";
@@ -13,7 +14,8 @@ import MusicPlayerVolume from "@/components/MusicPlayerVolume.vue";
 import { useSongStore } from "@/stores/song";
 
 const useSong = useSongStore();
-const { isPlaying, audio, currentArtist, currentTrack } = storeToRefs(useSong);
+const { isPlaying, audio, currentArtist, currentTrack, likedAll } =
+  storeToRefs(useSong);
 
 const isHover = ref(false);
 const isTrackTimeCurrent = ref<string | null>(null);
@@ -128,7 +130,8 @@ watch(
       </div>
 
       <div class="ml-8 flex items-center">
-        <Heart :size="20" fill-color="#1bd760" />
+        <Heart v-if="!likedAll" :size="20" fill-color="#1bd760" />
+        <HeartOutline v-else :size="20" fill-color="#1bd760" />
         <PictureInPictureBottomRight
           :size="18"
           class="ml-4"
