@@ -20,6 +20,7 @@ export const useSongStore = defineStore("song", {
     audio: null as HTMLAudioElement | null,
     currentArtist: null as Artist | null,
     currentTrack: null as Track | null,
+    likedAll: false,
   }),
 
   actions: {
@@ -91,6 +92,10 @@ export const useSongStore = defineStore("song", {
       this.audio = null;
       this.currentArtist = null;
       this.currentTrack = null;
+    },
+
+    like() {
+      this.likedAll = !this.likedAll;
     },
   },
   persist: true,
