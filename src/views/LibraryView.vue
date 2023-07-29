@@ -10,7 +10,7 @@ import ClockTimeThreeOutline from "vue-material-design-icons/ClockTimeThreeOutli
 import SongRow from "@/components/SongRow.vue";
 import { useSongStore } from "@/stores/song";
 
-import artist from "@/db/artist.json";
+import artist from "@/db/artist";
 import TitleButton from "@/components/TitleButton.vue";
 
 const useSong = useSongStore();

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import CategorySelect from "@/components/CategorySelect.vue";
-import categoryLIst from "@/db/categoryLIst.json";
+import categoryLIst from "@/db/categoryLIst";
 import TitleButton from "@/components/TitleButton.vue";
 </script>
 

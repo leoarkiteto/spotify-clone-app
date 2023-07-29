@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import HomeCard from "@/components/HomeCard.vue";
-import recommendation from "@/db/recommendation.json";
 import TitleButton from "@/components/TitleButton.vue";
+
+import recommendation from "@/db/recommendation";
 </script>
 
 <template>
