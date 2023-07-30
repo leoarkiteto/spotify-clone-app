@@ -4,3 +4,4 @@ vitest.config.ts
 .prettierrc.cjs
 tailwind.config.cjs
 env.d.ts
+components.d.ts
