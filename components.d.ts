@@ -4,3 +4,5 @@ declare module '@vue/runtime-core' {
     LottieAnimation: typeof import('vue3-lottie')['Vue3Lottie']
   }
 }
+
+export {}

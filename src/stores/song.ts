@@ -18,7 +18,7 @@ type Artist = {
 export const useSongStore = defineStore("song", {
   state: () => ({
     isPlaying: false,
-    audio: null as HTMLAudioElement | null,
+    audio: null as unknown as HTMLAudioElement,
     currentArtist: {} as Artist,
     currentTrack: {} as Track,
     likedAll: false,
@@ -90,7 +90,7 @@ export const useSongStore = defineStore("song", {
 
     resetState() {
       this.isPlaying = false;
-      this.audio = null;
+      this.audio = null as unknown as HTMLAudioElement;
       this.currentArtist = {} as Artist;
       this.currentTrack = {} as Track;
     },

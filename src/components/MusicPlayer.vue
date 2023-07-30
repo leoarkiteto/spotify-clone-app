@@ -20,26 +20,26 @@ const { isPlaying, audio, currentArtist, currentTrack, likedAll } =
 const isHover = ref(false);
 const isTrackTimeCurrent = ref<string | null>(null);
 const isTrackTimeTotal = ref<string | null>(null);
-const seeker = ref<HTMLInputElement | null>(null);
-const seekerContainer = ref<HTMLElement | null>(null);
+const seeker = ref<HTMLInputElement>(null as HTMLInputElement);
+const seekerContainer = ref<HTMLElement>(null as HTMLElement);
 const range = ref(0);
 
 function timeUpdate() {
-  audio.value!.addEventListener("timeupdate", () => {
-    const minutes = Math.floor(audio.value!.currentTime / 60);
-    const seconds = Math.floor(audio.value!.currentTime - minutes * 60);
+  audio.value.addEventListener("timeupdate", () => {
+    const minutes = Math.floor(audio.value.currentTime / 60);
+    const seconds = Math.floor(audio.value.currentTime - minutes * 60);
     isTrackTimeCurrent.value = `${minutes}:${seconds
       .toString()
       .padStart(2, "0")}`;
-    const value = (100 / audio.value!.duration) * audio.value!.currentTime;
+    const value = (100 / audio.value.duration) * audio.value.currentTime;
     range.value = value;
-    seeker.value!.value = value.toString();
+    seeker.value.value = value.toString();
   });
 }
 
 function loadMetadata() {
-  audio.value!.addEventListener("loadedmetadata", () => {
-    const duration = audio.value?.duration;
+  audio.value.addEventListener("loadedmetadata", () => {
+    const { duration } = audio.value;
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
     isTrackTimeTotal.value = `${minutes}:${seconds
@@ -57,28 +57,28 @@ onMounted(() => {
   }
 
   if (currentTrack.value) {
-    seeker.value?.addEventListener("change", () => {
-      audio.value!.currentTime =
-        audio.value!.duration * (seeker.value!.value / 100);
+    seeker.value.addEventListener("change", () => {
+      audio.value.currentTime =
+        audio.value.duration * (seeker.value.value / 100);
     });
 
-    seeker.value?.addEventListener("mousedown", () => {
-      audio.value?.pause();
+    seeker.value.addEventListener("mousedown", () => {
+      audio.value.pause();
       isPlaying.value = false;
     });
 
-    seeker.value?.addEventListener("mouseup", () => {
-      audio.value?.play();
+    seeker.value.addEventListener("mouseup", () => {
+      audio.value.play();
       isPlaying.value = true;
     });
 
-    seekerContainer.value?.addEventListener("click", (e: MouseEvent) => {
+    seekerContainer.value.addEventListener("click", (e: MouseEvent) => {
       const clickPosition =
-        (e.pageX - seekerContainer.value!.offsetLeft) /
-        seekerContainer.value!.offsetWidth;
-      audio.value!.currentTime = audio.value!.duration * clickPosition;
-      seeker.value!.value = String(
-        (100 / audio.value!.duration) * audio.value!.currentTime
+        (e.pageX - seekerContainer.value.offsetLeft) /
+        seekerContainer.value.offsetWidth;
+      audio.value.currentTime = audio.value.duration * clickPosition;
+      seeker.value.value = String(
+        (100 / audio.value.duration) * audio.value.currentTime
       );
     });
   }
@@ -96,7 +96,7 @@ watch(
   () => isTrackTimeCurrent.value,
   time => {
     if (time && time === isTrackTimeTotal.value) {
-      useSong.nextSong(currentTrack.value!);
+      useSong.nextSong(currentTrack.value);
     }
   }
 );
@@ -110,18 +110,18 @@ watch(
     <div class="flex w-1/4 items-center">
       <div class="ml-4 flex items-center">
         <img
-          :src="currentArtist?.albumCover"
+          :src="currentArtist.albumCover"
           alt="album"
           class="rounded-sm shadow-2xl"
           width="55" />
         <div class="ml-4">
           <p
             class="w-24 cursor-pointer truncate text-[14px] text-white hover:underline">
-            {{ currentTrack?.name }}
+            {{ currentTrack.name }}
           </p>
           <p
             class="cursor-pointer text-[11px] text-gray-400 hover:text-white hover:underline">
-            {{ currentArtist?.name }}
+            {{ currentArtist.name }}
           </p>
         </div>
       </div>
@@ -143,12 +143,12 @@ watch(
             <SkipBackward
               :size="25"
               fill-color="#fff"
-              @click="useSong.prevSong(currentTrack!)" />
+              @click="useSong.prevSong(currentTrack)" />
           </button>
           <button
             class="mx-3 rounded-full bg-white p-1"
             type="button"
-            @click="useSong.playOrPauseThisSong(currentArtist!, currentTrack!)">
+            @click="useSong.playOrPauseThisSong(currentArtist, currentTrack)">
             <Play v-if="!isPlaying" :size="25" fill-color="#181818" />
             <Pause v-else :size="25" fill-color="#181818" />
           </button>
@@ -156,7 +156,7 @@ watch(
             <SkipForward
               :size="25"
               fill-color="#fff"
-              @click="useSong.nextSong(currentTrack!)" />
+              @click="useSong.nextSong(currentTrack)" />
           </button>
         </div>
       </div>
