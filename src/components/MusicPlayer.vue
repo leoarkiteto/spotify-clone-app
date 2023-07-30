@@ -20,8 +20,8 @@ const { isPlaying, audio, currentArtist, currentTrack, likedAll } =
 const isHover = ref(false);
 const isTrackTimeCurrent = ref<string | null>(null);
 const isTrackTimeTotal = ref<string | null>(null);
-const seeker = ref<HTMLInputElement>(null as HTMLInputElement);
-const seekerContainer = ref<HTMLElement>(null as HTMLElement);
+const seeker = ref<HTMLInputElement>(null as unknown as HTMLInputElement);
+const seekerContainer = ref<HTMLElement>(null as unknown as HTMLElement);
 const range = ref(0);
 
 function timeUpdate() {
@@ -59,7 +59,7 @@ onMounted(() => {
   if (currentTrack.value) {
     seeker.value.addEventListener("change", () => {
       audio.value.currentTime =
-        audio.value.duration * (seeker.value.value / 100);
+        audio.value.duration * (+seeker.value.value / 100);
     });
 
     seeker.value.addEventListener("mousedown", () => {
