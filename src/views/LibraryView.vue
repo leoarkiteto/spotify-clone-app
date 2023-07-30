@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
-import Play from 'vue-material-design-icons/Play.vue';
-import Pause from 'vue-material-design-icons/Pause.vue';
-import Heart from 'vue-material-design-icons/Heart.vue';
-import HeartOutline from 'vue-material-design-icons/HeartOutline.vue';
-import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue';
-import ClockTimeThreeOutline
-  from 'vue-material-design-icons/ClockTimeThreeOutline.vue';
+import { storeToRefs } from "pinia";
+import Play from "vue-material-design-icons/Play.vue";
+import Pause from "vue-material-design-icons/Pause.vue";
+import Heart from "vue-material-design-icons/Heart.vue";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
+import DotsHorizontal from "vue-material-design-icons/DotsHorizontal.vue";
+import ClockTimeThreeOutline from "vue-material-design-icons/ClockTimeThreeOutline.vue";
 
-import SongRow from '@/components/SongRow.vue';
-import { useSongStore } from '@/stores/song';
+import SongRow from "@/components/SongRow.vue";
+import { useSongStore } from "@/stores/song";
 
-import artist from '@/db/artist';
-import TitleButton from '@/components/TitleButton.vue';
+import artist from "@/db/artist";
+import TitleButton from "@/components/TitleButton.vue";
 
 const useSong = useSongStore();
 const { isPlaying, currentTrack, currentArtist, likedAll } =
@@ -65,8 +64,7 @@ function likeAlbum() {
           <button
             class="rounded-full bg-white p-1"
             type="button"
-            @click="playFunc"
-          >
+            @click="playFunc">
             <Play v-if="!isPlaying" :size="25" fill-color="#181818" />
             <Pause v-else :size="25" fill-color="#181818" />
           </button>
