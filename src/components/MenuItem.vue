@@ -45,13 +45,11 @@ function isHover() {
     @focusin="isHover"
     @focusout="isHover"
     @mouseenter="isHover"
-    @mouseleave="isHover"
-  >
+    @mouseleave="isHover">
     <img :src="`/images/icons/${icon}.png`" :width="iconSize" alt="" />
     <div
       :class="textIsHover ? 'text-white' : 'text-gray-400'"
-      class="mt-0.5 text-[14px] font-semibold"
-    >
+      class="mt-0.5 text-[14px] font-semibold">
       <span :class="route.path === pageUrl ? 'text-white' : ''">{{
         props.name
       }}</span>

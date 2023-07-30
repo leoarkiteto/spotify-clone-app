@@ -16,8 +16,7 @@ import recommendation from "@/db/recommendation";
         :key="tip.imageID"
         :image="`https://picsum.photos/id/${tip.imageID}/300/300`"
         :subtitle="tip.subtitle"
-        :title="tip.title"
-      />
+        :title="tip.title" />
     </div>
   </div>
 
@@ -31,8 +30,7 @@ import recommendation from "@/db/recommendation";
         :key="radio.imageID"
         :image="`https://picsum.photos/id/${radio.imageID}/300/300`"
         :subtitle="radio.subtitle"
-        :title="radio.title"
-      />
+        :title="radio.title" />
     </div>
   </div>
 
@@ -46,8 +44,7 @@ import recommendation from "@/db/recommendation";
         :key="song.imageID"
         :image="`https://picsum.photos/id/${song.imageID}/300/300`"
         :subtitle="song.subtitle"
-        :title="song.title"
-      />
+        :title="song.title" />
     </div>
   </div>
 </template>

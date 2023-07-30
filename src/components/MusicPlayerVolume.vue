@@ -28,8 +28,7 @@ onMounted(() => {
     @focusin="isHover = true"
     @focusout="isHover = false"
     @mouseenter="isHover = true"
-    @mouseleave="isHover = false"
-  >
+    @mouseleave="isHover = false">
     <label for="volume">
       <input
         id="volume"
@@ -37,19 +36,16 @@ onMounted(() => {
         v-model="vol"
         :class="{ rangeDotHidden: !isHover }"
         class="absolute z-40 my-2 h-0 w-full appearance-none rounded-full bg-opacity-100 accent-white focus:outline-none"
-        type="range"
-      />
+        type="range" />
     </label>
 
     <div
       :class="isHover ? 'bg-green-500' : 'bg-white'"
       :style="`width: ${vol}%;`"
-      class="pointer-events-none absolute inset-y-0 left-0 z-10 mt-[6px] h-[4px] w-0"
-    ></div>
+      class="pointer-events-none absolute inset-y-0 left-0 z-10 mt-[6px] h-[4px] w-0"></div>
 
     <div
-      class="absolute inset-y-0 left-0 z-[0] mt-[6px] h-[4px] w-full rounded-full bg-gray-500"
-    ></div>
+      class="absolute inset-y-0 left-0 z-[0] mt-[6px] h-[4px] w-full rounded-full bg-gray-500"></div>
   </div>
 </template>
 
