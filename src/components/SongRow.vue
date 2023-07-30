@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
+import { Vue3Lottie } from "vue3-lottie";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
 import Heart from "vue-material-design-icons/Heart.vue";
 import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 
 import { useSongStore } from "@/stores/song";
+import Spotify from "@/assets/spotify.json";
 
 type Track = {
   id: number;
@@ -45,32 +47,32 @@ onMounted(() => {
     @focusin="isHover = true"
     @focusout="isHover = false"
     @mouseenter="isHover = true"
-    @mouseleave="isHover = false"
-  >
+    @mouseleave="isHover = false">
     <div class="flex w-full items-center py-1.5">
       <div v-if="isHover" class="mr-[6px] w-[40px] cursor-pointer">
         <Play
           v-if="!isPlaying"
           :size="25"
           fill-color="#fff"
-          @click="useSong.playOrPauseThisSong(artist, track)"
-        />
+          @click="useSong.playOrPauseThisSong(artist, track)" />
         <Play
           v-else-if="isPlaying && currentTrack.name !== track.name"
           :size="25"
           fill-color="#fff"
-          @click="useSong.loadSong(artist, track)"
-        />
+          @click="useSong.loadSong(artist, track)" />
         <Pause
           v-else
           :size="25"
           fill-color="#fff"
-          @click="useSong.playOrPauseSong"
-        />
+          @click="useSong.playOrPauseSong" />
       </div>
 
-      <div v-else class="ml-5 w-[40px] font-semibold text-white">
+      <div v-else class="mr-2 w-[40px] text-center font-semibold text-white">
+        <span v-if="isPlaying && currentTrack.name === track.name">
+          <Vue3Lottie :animation-data="Spotify" :height="30" :width="30" />
+        </span>
         <span
+          v-else
           :class="{
             'text-green-500': currentTrack?.name === track.name,
           }"
@@ -83,8 +85,7 @@ onMounted(() => {
           :class="
             currentTrack?.name === track.name ? 'text-green-500' : 'text-white'
           "
-          class="font-semibold"
-        >
+          class="font-semibold">
           {{ track.name }}
         </div>
         <div class="text-sm font-semibold text-gray-400">

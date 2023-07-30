@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import Heart from "vue-material-design-icons/Heart.vue";
+import HeartOutline from "vue-material-design-icons/HeartOutline.vue";
 import Play from "vue-material-design-icons/Play.vue";
 import Pause from "vue-material-design-icons/Pause.vue";
 import SkipBackward from "vue-material-design-icons/SkipBackward.vue";
@@ -13,7 +14,8 @@ import MusicPlayerVolume from "@/components/MusicPlayerVolume.vue";
 import { useSongStore } from "@/stores/song";
 
 const useSong = useSongStore();
-const { isPlaying, audio, currentArtist, currentTrack } = storeToRefs(useSong);
+const { isPlaying, audio, currentArtist, currentTrack, likedAll } =
+  storeToRefs(useSong);
 
 const isHover = ref(false);
 const isTrackTimeCurrent = ref<string | null>(null);
@@ -74,8 +76,7 @@ onMounted(() => {
       const clickPosition =
         (e.pageX - seekerContainer.value!.offsetLeft) /
         seekerContainer.value!.offsetWidth;
-      const time = audio.value!.duration * clickPosition;
-      audio.value!.currentTime = time;
+      audio.value!.currentTime = audio.value!.duration * clickPosition;
       seeker.value!.value = String(
         (100 / audio.value!.duration) * audio.value!.currentTime
       );
@@ -105,35 +106,33 @@ watch(
   <div
     v-if="audio"
     id="musicPlayer"
-    class="fixed bottom-0 z-50 flex h-[90px] w-full items-center justify-between border-t border-t-[#272727] bg-[#181818]"
-  >
+    class="fixed bottom-0 z-50 flex h-[90px] w-full items-center justify-between border-t border-t-[#272727] bg-[#181818]">
     <div class="flex w-1/4 items-center">
       <div class="ml-4 flex items-center">
         <img
           :src="currentArtist?.albumCover"
           alt="album"
           class="rounded-sm shadow-2xl"
-          width="55"
-        />
+          width="55" />
         <div class="ml-4">
-          <p class="cursor-pointer text-[14px] text-white hover:underline">
+          <p
+            class="w-24 cursor-pointer truncate text-[14px] text-white hover:underline">
             {{ currentTrack?.name }}
           </p>
           <p
-            class="cursor-pointer text-[11px] text-gray-400 hover:text-white hover:underline"
-          >
-            {{ currentTrack?.name }}
+            class="cursor-pointer text-[11px] text-gray-400 hover:text-white hover:underline">
+            {{ currentArtist?.name }}
           </p>
         </div>
       </div>
 
       <div class="ml-8 flex items-center">
-        <Heart :size="20" fill-color="#1bd760" />
+        <Heart v-if="!likedAll" :size="20" fill-color="#1bd760" />
+        <HeartOutline v-else :size="20" fill-color="#1bd760" />
         <PictureInPictureBottomRight
           :size="18"
           class="ml-4"
-          fill-color="#fff"
-        />
+          fill-color="#fff" />
       </div>
     </div>
 
@@ -144,14 +143,12 @@ watch(
             <SkipBackward
               :size="25"
               fill-color="#fff"
-              @click="useSong.prevSong(currentTrack!)"
-            />
+              @click="useSong.prevSong(currentTrack!)" />
           </button>
           <button
             class="mx-3 rounded-full bg-white p-1"
             type="button"
-            @click="useSong.playOrPauseThisSong(currentArtist!, currentTrack!)"
-          >
+            @click="useSong.playOrPauseThisSong(currentArtist!, currentTrack!)">
             <Play v-if="!isPlaying" :size="25" fill-color="#181818" />
             <Pause v-else :size="25" fill-color="#181818" />
           </button>
@@ -159,8 +156,7 @@ watch(
             <SkipForward
               :size="25"
               fill-color="#fff"
-              @click="useSong.nextSong(currentTrack!)"
-            />
+              @click="useSong.nextSong(currentTrack!)" />
           </button>
         </div>
       </div>
@@ -177,8 +173,7 @@ watch(
           @focusin="isHover = true"
           @focusout="isHover = false"
           @mouseenter="isHover = true"
-          @mouseleave="isHover = false"
-        >
+          @mouseleave="isHover = false">
           <label for="seeker">
             <input
               id="seeker"
@@ -186,19 +181,16 @@ watch(
               v-model="range"
               :class="{ rangeDotHidden: !isHover }"
               class="absolute z-40 my-2 h-0 w-full appearance-none rounded-full bg-opacity-100 accent-white focus:outline-none"
-              type="range"
-            />
+              type="range" />
           </label>
 
           <div
             :class="isHover ? 'bg-green-500' : 'bg-white'"
             :style="`width: ${range}%;`"
-            class="pointer-events-none absolute inset-y-0 left-0 z-10 mt-[6px] h-[4px] w-0"
-          ></div>
+            class="pointer-events-none absolute inset-y-0 left-0 z-10 mt-[6px] h-[4px] w-0"></div>
 
           <div
-            class="absolute inset-y-0 left-0 z-[0] mt-[6px] h-[4px] w-full rounded-full bg-gray-500"
-          ></div>
+            class="absolute inset-y-0 left-0 z-[0] mt-[6px] h-[4px] w-full rounded-full bg-gray-500"></div>
         </div>
 
         <div

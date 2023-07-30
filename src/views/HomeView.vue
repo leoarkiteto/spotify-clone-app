@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import HomeCard from "@/components/HomeCard.vue";
-import recommendation from "@/db/recommendation.json";
 import TitleButton from "@/components/TitleButton.vue";
+
+import recommendation from "@/db/recommendation";
 </script>
 
 <template>
@@ -15,8 +16,7 @@ import TitleButton from "@/components/TitleButton.vue";
         :key="tip.imageID"
         :image="`https://picsum.photos/id/${tip.imageID}/300/300`"
         :subtitle="tip.subtitle"
-        :title="tip.title"
-      />
+        :title="tip.title" />
     </div>
   </div>
 
@@ -30,8 +30,7 @@ import TitleButton from "@/components/TitleButton.vue";
         :key="radio.imageID"
         :image="`https://picsum.photos/id/${radio.imageID}/300/300`"
         :subtitle="radio.subtitle"
-        :title="radio.title"
-      />
+        :title="radio.title" />
     </div>
   </div>
 
@@ -45,8 +44,7 @@ import TitleButton from "@/components/TitleButton.vue";
         :key="song.imageID"
         :image="`https://picsum.photos/id/${song.imageID}/300/300`"
         :subtitle="song.subtitle"
-        :title="song.title"
-      />
+        :title="song.title" />
     </div>
   </div>
 </template>
